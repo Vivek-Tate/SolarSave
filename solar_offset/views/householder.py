@@ -3,6 +3,7 @@ from solar_offset.db import get_db
 from solar_offset.utils.carbon_offset_util import SOLAR_PANEL_POWER_kW, calc_carbon_offset, calc_solar_panel_offset
 from solar_offset.utils.misc import calculate_percentile, count_occurences, get_max_occurence, round_to_n_sig_figs
 from solar_offset.utils.statistics_util import calculate_statistics
+from solar_offset.utils.statistics_util import countries_stats
 
 from math import floor, isclose
 
@@ -101,6 +102,14 @@ def about():
 
 @bp.route("/countries")
 def country_list():
+    countries_list = countries()
+    solar_hours, carbon_emissions, solar_panel_price, electricity_mix = countries_stats(countries_list)
+
+    return render_template(
+            "./users/householder/country_list.html",
+            countries=countries_list, solar_hours_chart=solar_hours, carbon_emissions_chart=carbon_emissions, solar_panel_price_chart=solar_panel_price, electricity_mix_chart=electricity_mix)
+
+def countries():
     db = get_db()
     countries = db.execute(
         "SELECT country.*, COUNT(donation_amount) AS donation_count, SUM(donation_amount) AS donation_sum \
@@ -160,11 +169,7 @@ def country_list():
             cd.pop("short_code")
         return country_dicts
     else:
-        return render_template(
-            "./users/householder/country_list.html",
-            countries=sorted(country_dicts, key=lambda c: c['carbon_offset_per_panel_kg'], reverse=True)
-        )
-
+        return sorted(country_dicts, key=lambda c: c['carbon_offset_per_panel_kg'], reverse=True)
 
 @bp.route("/countries/<country_code>")
 def country(country_code):
