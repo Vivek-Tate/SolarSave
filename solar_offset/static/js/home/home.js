@@ -84,6 +84,10 @@ function addButtons(canvas) {
     // USA
     const usa = createButton("../../static/images/countries/united-states-of-america.png", 20, 25, "/countries/usa");
     canvas.parentNode.appendChild(usa);
+
+    // Spain
+    const spain = createButton("../../static/images/countries/spain.png", 48, 26, "/countries/esp");
+    canvas.parentNode.appendChild(spain);
 }
 
 // Function to create button on the map
