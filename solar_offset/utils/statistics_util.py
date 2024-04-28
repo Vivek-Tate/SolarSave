@@ -3,11 +3,14 @@ from solar_offset.db import get_db
 from .carbon_offset_util import calculate_reduced_carbon_footprint
 
 import matplotlib
+
 matplotlib.use('Agg')
 
 import matplotlib.pyplot as plt
 import io
 import base64
+from collections import defaultdict
+from datetime import datetime
 
 
 # Public Methods
@@ -67,7 +70,7 @@ def countries_stats(countries):
     return solar_hours_chart, carbon_emissions_chart, solar_panel_price_chart, electricity_mix_chart
 
 
-# Charts
+# Charts - Countries
 def create_solar_hours_chart(countries):
     # Create a bar chart for solar hours
     country_names = [country['name'] for country in countries]
@@ -89,6 +92,7 @@ def create_solar_hours_chart(countries):
     solar_hours_chart = base64.b64encode(img.getvalue()).decode('utf-8')
 
     return solar_hours_chart
+
 
 def create_carbon_emissions_chart(countries):
     # Create a bar chart for carbon emissions
@@ -112,6 +116,7 @@ def create_carbon_emissions_chart(countries):
 
     return carbon_emissions_chart
 
+
 def create_solar_panel_price_chart(countries):
     # Create a scatter plot for solar panel price
     country_names = [country['name'] for country in countries]
@@ -134,6 +139,7 @@ def create_solar_panel_price_chart(countries):
 
     return solar_panel_price_chart
 
+
 def create_electricity_mix_chart(countries):
     # Create a pie chart for electricity mix percentage
     country_names = [country['name'] for country in countries]
@@ -152,3 +158,97 @@ def create_electricity_mix_chart(countries):
     electricity_mix_chart = base64.b64encode(img.getvalue()).decode('utf-8')
 
     return electricity_mix_chart
+
+
+# Charts - Staff Dashboard
+
+def staff_dashboard_statistics(donations):
+    # Create the graphs
+    total_donations_chart = create_total_donations_chart(donations)
+    donation_frequency_chart = create_donation_frequency_chart(donations)
+    avg_donation_chart = create_avg_donation_chart(donations)
+
+    return total_donations_chart, donation_frequency_chart, avg_donation_chart
+
+
+def create_total_donations_chart(donations):
+    # Create a stacked bar chart for total donations by country and organization
+    country_org_donations = defaultdict(lambda: defaultdict(int))
+    for donation in donations:
+        country_name = donation['country_name']
+        organization_name = donation['organization_name']
+        amount = donation['amount']
+        country_org_donations[country_name][organization_name] += amount
+
+    fig = plt.figure(figsize=(10, 6), facecolor='#f5f5f5')
+    ax = fig.add_subplot(111)
+    bottom = [0] * len(country_org_donations)
+    for organization_name in sorted(set(d['organization_name'] for d in donations)):
+        amounts = [country_org_donations[country_name][organization_name] for country_name in
+                   sorted(country_org_donations)]
+        ax.bar(sorted(country_org_donations), amounts, bottom=bottom, label=organization_name)
+        bottom = [x + y for x, y in zip(bottom, amounts)]
+    ax.set_xlabel('Country')
+    ax.set_ylabel('Total Donations')
+    ax.set_title('Total Donations by Country and Organisation')
+    ax.legend()
+    plt.xticks(rotation=0)
+
+    # Convert the chart to an image
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    img.seek(0)
+    total_donations_chart = base64.b64encode(img.getvalue()).decode('utf-8')
+
+    return total_donations_chart
+
+
+def create_donation_frequency_chart(donations):
+    # Create a line chart for donation frequency over time
+    donation_dates = [datetime.strptime(d['created'], '%Y-%m-%d %H:%M') for d in donations]
+    fig = plt.figure(figsize=(10, 6), facecolor='#f5f5f5')
+    plt.plot(donation_dates)
+    plt.xlabel('Date')
+    plt.ylabel('Donation Count')
+    plt.title('Donation Frequency over Time')
+    plt.xticks(rotation=0)
+
+    # Convert the chart to an image
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    img.seek(0)
+    donation_frequency_chart = base64.b64encode(img.getvalue()).decode('utf-8')
+
+    return donation_frequency_chart
+
+
+def create_avg_donation_chart(donations):
+    # Create a bar chart for average donation amount by country and organization
+    country_org_donations = defaultdict(lambda: defaultdict(list))
+    for donation in donations:
+        country_name = donation['country_name']
+        organization_name = donation['organization_name']
+        amount = donation['amount']
+        country_org_donations[country_name][organization_name].append(amount)
+
+    fig = plt.figure(figsize=(10, 6), facecolor='#f5f5f5')
+    ax = fig.add_subplot(111)
+    x = []
+    for country_name in sorted(country_org_donations):
+        for organization_name in sorted(country_org_donations[country_name]):
+            avg_amount = sum(country_org_donations[country_name][organization_name]) / len(
+                country_org_donations[country_name][organization_name])
+            ax.bar(f"{country_name} - {organization_name}", avg_amount)
+            x.append(f"{country_name} - {organization_name}")
+    ax.set_xlabel('Country - Organisation')
+    ax.set_ylabel('Average Donation Amount')
+    ax.set_title('Average Donation Amount by Country and Organisation')
+    plt.xticks(rotation=0)
+
+    # Convert the chart to an image
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    img.seek(0)
+    avg_donation_chart = base64.b64encode(img.getvalue()).decode('utf-8')
+
+    return avg_donation_chart
