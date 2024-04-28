@@ -10,7 +10,8 @@ def test_countries(app, client):
         db = get_db()
 
         response = client.get("/countries?raw")
-        r_json = json.loads(response.data)
+        t_json = json.loads(response.data)
+        r_json = t_json['countries']
 
         # Ensure that these fields are not contained in the 'raw' response
         if len(r_json) > 0:
@@ -26,7 +27,8 @@ def test_countries(app, client):
 def test_countries_donation_sums(app, client):
     with app.app_context():
         response = client.get("/countries?raw")
-        r_json = json.loads(response.data)
+        t_json = json.loads(response.data)
+        r_json = t_json['countries']
 
         db = get_db()
         donations = db.execute("SELECT * FROM donation").fetchall()
