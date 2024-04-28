@@ -3,75 +3,86 @@
 <!-- Title Section -->
 {% block title %}Frequently Asked Questions{% endblock %}
 
-{% block body %}
-    <div class="container text-center">
-        <h2 class="text-primary fw-bold">FAQ</h3>
-        <p>
-            Find the answers for the most frequently asked questions below
-        </p>
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/faq-style.css') }}">
+{% endblock %}
 
-        
-        <div class="row">
-            <div class="col-md-6 col-lg-6 mb-4">
-                <h6 class="mb-3 text-primary"><i class="far fa-paper-plane text-primary pe-2"></i>
-                    A simple question?
-                </h6>
-                <div class="d-flex align-items-center justify-content-center">
-                    <p style="text-align: left; width: 25em;">
-                        <strong><u>Absolutely!</u></strong> We work with top payment companies which guarantees
-                        your
-                        safety and
-                        security. All billing information is stored on our payment processing partner.
-                    </p>
-                </div>
+{% block body %}
+<div class="container text-center">
+    <h2 class="text-primary fw-bold">FAQ</h3>
+    <p>
+        Find the answers for the most frequently asked questions below
+    </p>
+
+
+    <div class="row faq-tile-container">
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 text-primary">
+                Why Should I Donate my Money?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    By no means you have to feel obligated to donate to SolarSave.
+                    We are simply offering a means to let you do your part in combatting climate change
+                    by offestting your households carbon footprint.
+                </p>
             </div>
-        
-            <div class="col-md-6 col-lg-6 mb-4">
-              <h6 class="mb-3 text-primary"><i class="fas fa-pen-alt text-primary pe-2"></i> A question
-                that
-                is longer then the previous one?</h6>
-              <p>
-                <strong><u>Yes, it is possible!</u></strong> You can cancel your subscription anytime in
-                your
-                account. Once the subscription is
-                cancelled, you will not be charged next month.
-              </p>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 text-primary">
+                I want to Donate to a Country that's not on Your List.
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    We are always working on expanding SolarSave.
+                    If you have any ideas or suggestions, please feel free to
+                    <a href="{{ url_for('home.contact') }}">Contact us</a>.
+                </p>
             </div>
-        
-            <div class="col-md-6 col-lg-6 mb-4">
-              <h6 class="mb-3 text-primary"><i class="fas fa-user text-primary pe-2"></i> A simple
-                question?
-              </h6>
-              <p>
-                Currently, we only offer monthly subscription. You can upgrade or cancel your monthly
-                account at any time with no further obligation.
-              </p>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 text-primary">
+                Are your Payments secure?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    We are doing our utmost to ensuring that any donations are transferred securely.
+                    Currently our payments are processed through PayPal which is a secure and reliable payment provider,
+                    even when you don't have an account with them.
+                </p>
             </div>
-        
-            <div class="col-md-6 col-lg-6 mb-4">
-              <h6 class="mb-3 text-primary"><i class="fas fa-rocket text-primary pe-2"></i> A simple
-                question?
-              </h6>
-              <p>
-                Yes. Go to the billing section of your dashboard and update your payment information.
-              </p>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 text-primary">
+                Where Does my Money go?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    Your donations are directly transferred to the organizations that you choose.
+                    While we provide you with the tools to donate, no part of your donation is ever directly held by us.
+                </p>
             </div>
-        
-            <div class="col-md-6 col-lg-6 mb-4">
-              <h6 class="mb-3 text-primary"><i class="fas fa-home text-primary pe-2"></i> A simple
-                question?
-              </h6>
-              <p><strong><u>Unfortunately no</u>.</strong> We do not issue full or partial refunds for any
-                reason.</p>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 text-primary">
+                What if I want a refund?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    While we offer the means for you to make donations,
+                    we are never directly handling the money that you choose to donate.
+                    As a result, we do not have any power to refund the money that you donated.
+                    If you wish try and refund your donation, please contact the organization that you donated to,
+                    Paypal's customer support, or your bank.
+                </p>
             </div>
-        
-            <div class="col-md-6 col-lg-6 mb-4">
-              <h6 class="mb-3 text-primary"><i class="fas fa-book-open text-primary pe-2"></i> Another
-                question that is longer than usual</h6>
-              <p>
-                Of course! We’re happy to offer a free plan to anyone who wants to try our service.
-              </p>
-            </div>
-          </div>
+        </div>
+
     </div>
+</div>
 {% endblock %}
