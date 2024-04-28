@@ -9,7 +9,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
 import base64
-from collections import defaultdict
+from collections import defaultdict, Counter
 from datetime import datetime
 
 
@@ -146,7 +146,8 @@ def create_electricity_mix_chart(countries):
     electricity_mix_percentage = [country['electricity_mix_percentage'] for country in countries]
 
     fig = plt.figure(figsize=(8, 8), facecolor='#f5f5f5')
-    plt.pie(electricity_mix_percentage, labels=country_names, autopct='%1.1f%%', colors=['#FFA726', '#66BB6A', '#42A5F5', '#EF5350', '#AB47BC'])
+    plt.pie(electricity_mix_percentage, labels=country_names, autopct='%1.1f%%',
+            colors=['#FFA726', '#66BB6A', '#42A5F5', '#EF5350', '#AB47BC'])
     plt.axis('equal')
     plt.title('Electricity Mix Percentage by Country', fontsize=16, fontweight='bold')
     plt.legend(country_names, loc='upper left', fontsize=10)
@@ -160,7 +161,7 @@ def create_electricity_mix_chart(countries):
     return electricity_mix_chart
 
 
-# Charts - Staff Dashboard
+# Charts - Staff & Admin Dashboard
 
 def staff_dashboard_statistics(donations):
     # Create the graphs
@@ -252,3 +253,37 @@ def create_avg_donation_chart(donations):
     avg_donation_chart = base64.b64encode(img.getvalue()).decode('utf-8')
 
     return avg_donation_chart
+
+
+# Charts - Admin Dashboard
+
+def admin_dashboard_statistics(donations, users):
+    # Create the graphs
+    total_donations_chart = create_total_donations_chart(donations)
+    donation_frequency_chart = create_donation_frequency_chart(donations)
+    avg_donation_chart = create_avg_donation_chart(donations)
+    user_type_chart = create_user_type_chart(users)
+
+    return total_donations_chart, donation_frequency_chart, avg_donation_chart, user_type_chart
+
+
+def create_user_type_chart(users):
+    # Create a pie chart for user type distribution
+    user_types = [user['user_type'] for user in users]
+    user_type_counts = Counter(user_types)
+
+    fig = plt.figure(figsize=(8, 8), facecolor='#f5f5f5')
+    colors = ['#4CAF50', '#E53935', '#1E88E5']
+    explode = (0.1, 0.1, 0.1)
+    plt.pie(user_type_counts.values(), labels=user_type_counts.keys(), colors=colors, explode=explode, autopct='%1.1f%%', startangle=90)
+    plt.axis('equal')
+    plt.title('User Type Distribution', fontsize=16, fontweight='bold')
+    plt.legend(user_type_counts.keys(), loc='upper left', fontsize=12)
+
+    # Convert the chart to an image
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    img.seek(0)
+    user_type_chart = base64.b64encode(img.getvalue()).decode('utf-8')
+
+    return user_type_chart
