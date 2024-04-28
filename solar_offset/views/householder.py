@@ -170,14 +170,7 @@ def countries():
         else:
             country['signal_color'] = "amber"
 
-    if "raw" in request.args:
-        for cd in country_dicts:
-            cd.pop("description")
-            cd.pop("electricty_consumption")
-            cd.pop("short_code")
-        return country_dicts
-    else:
-        return sorted(country_dicts, key=lambda c: c['carbon_offset_per_panel_kg'], reverse=True)
+    return sorted(country_dicts, key=lambda c: c['carbon_offset_per_panel_kg'], reverse=True)
 
 
 @bp.route("/countries/<country_code>")
