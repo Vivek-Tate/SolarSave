@@ -1,13 +1,31 @@
 
 /* Style Links in Base Template Navbar */
 ul.nav li {
-    margin: 0 0 auto 14px;
+    margin: 0 0.5em;
 }
-ul.nav a {
-    line-height: 1em;
+.nav-link {
+    padding: 0 2.5em;
+    border-radius: 1em;
+    background-color: rgb(238, 238, 238);
+    border-bottom: 0.1em solid rgb(200, 200, 200);
     text-align: center;
     color: inherit;
     font-size: large;
+}
+.nav-link:hover {
+    background-color: rgb(225, 225, 225);
+    color: inherit;
+}
+.nav-link.sep {
+    background-color: transparent;
+    border: none;
+}
+li.sep:last-child {
+    display: none;
+}
+.nav-link.active {
+    color: green;
+    font-weight: bold;
 }
 
 
@@ -104,9 +122,4 @@ hr.tight {
     border: 0.1em solid;
     border-radius: 1em;
     padding: 0.5em;
-}
-
-.nav-link.active {
-    color: green;
-    font-weight: bold;
 }
