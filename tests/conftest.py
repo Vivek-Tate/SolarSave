@@ -2,6 +2,7 @@ import os
 import tempfile
 
 import pytest
+from flask import template_rendered
 from solar_offset import create_app
 from solar_offset.db import get_db, init_db
 
@@ -36,6 +37,20 @@ def client(app):
 @pytest.fixture
 def runner(app):
     return app.test_cli_runner()
+
+# Fixture taken from https://stackoverflow.com/a/58204843
+@pytest.fixture
+def captured_templates(app):
+    recorded = []
+
+    def record(sender, template, context, **extra):
+        recorded.append((template, context))
+
+    template_rendered.connect(record, app)
+    try:
+        yield recorded
+    finally:
+        template_rendered.disconnect(record, app)
 
 
 # Allow authentication for test cases
