@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from solar_offset.db import get_db
 from solar_offset.utils.carbon_offset_util import SOLAR_PANEL_POWER_kW
 from solar_offset.views.auth import login_required
+from solar_offset.utils.statistics_util import staff_dashboard_statistics
 bp = Blueprint("staff", __name__)
 
 @bp.route("/staff", methods=["GET"])
@@ -31,4 +32,6 @@ def staff():
             }
         )
 
-    return render_template("./users/staff/staffdashboard.html", donations=donations)
+    total_donations_chart, donation_frequency_chart, avg_donation_chart = staff_dashboard_statistics(donations)
+
+    return render_template("./users/staff/staffdashboard.html", donations=donations, total_donations_chart=total_donations_chart, donation_frequency_chart=donation_frequency_chart, avg_donation_chart=avg_donation_chart)

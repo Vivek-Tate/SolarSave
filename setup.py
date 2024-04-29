@@ -8,5 +8,7 @@ setup(
         'python-dotenv',
         'google-api-python-client',
         'email-validator'
+        'matplotlib'
+        'numpy'
     ]
 )
