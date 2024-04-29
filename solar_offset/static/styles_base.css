@@ -29,6 +29,13 @@ li.sep:last-child {
 }
 
 
+.pg-title {
+    /* color: rgb(0, 50, 0); */
+    color: darkgreen;
+    font-weight: bold;
+}
+
+
 .gradient-text {
     -webkit-background-clip: text; /* For Safari */
     background-clip: text;
