@@ -3,6 +3,7 @@ from solar_offset.db import get_db
 from solar_offset.utils.carbon_offset_util import SOLAR_PANEL_POWER_kW, calc_carbon_offset, calc_solar_panel_offset
 from solar_offset.utils.misc import calculate_percentile, count_occurences, get_max_occurence, round_to_n_sig_figs
 from solar_offset.utils.statistics_util import calculate_statistics
+from solar_offset.utils.statistics_util import countries_stats
 
 from math import floor, isclose
 
@@ -26,9 +27,9 @@ def dashboard():
                 ON (country.country_code == donation.country_code) \
                 WHERE householder_id == ?;"
             , [g.user['id']]).fetchall()
-        calc_offset = sum([ calc_carbon_offset(cd) * cd['donation_amount'] / 1000000 for cd in user_donations_countries ])
+        calc_offset = sum([calc_carbon_offset(cd) * cd['donation_amount'] / 1000000 for cd in user_donations_countries])
         carbon_offset_data = {
-            'donation_offset': round(calc_offset * 1000, 2), # Convert from tons to kg
+            'donation_offset': round(calc_offset * 1000, 2),  # Convert from tons to kg
             'reduction_percent': round(calc_offset / user_footprint * 100, 2),
             'reduced_footprint': round(user_footprint - calc_offset, 2)
         }
@@ -41,7 +42,7 @@ def dashboard():
             ON (country.country_code == donation.country_code AND organization.name_slug == donation.organization_slug) \
             WHERE donation.householder_id == ? \
             ORDER BY donation.created DESC", [g.user['id']]).fetchall()
-    donations = [ dict(d) for d in donations ]
+    donations = [dict(d) for d in donations]
     for d in donations:
         d['created_date'] = d['created'].date()
         d['donation_panels'] = round(d['donation_amount'] / (SOLAR_PANEL_POWER_kW * d['kw_panel_price']))
@@ -49,19 +50,20 @@ def dashboard():
     stats = calculate_statistics()
 
     stats_dict = dict()
-    stats_dict['count_countries'] = len(set([ d['country_code'] for d in donations ]))
+    stats_dict['count_countries'] = len(set([d['country_code'] for d in donations]))
     if donations:
         stats_dict['dominant_country'] = get_max_occurence(count_occurences([d['country_name'] for d in donations]))
-        stats_dict['donated_panels'] = sum([ d['donation_panels'] for d in donations ])
-        stats_dict['donated_sum'] = sum([ d['donation_amount'] for d in donations ])
+        stats_dict['donated_panels'] = sum([d['donation_panels'] for d in donations])
+        stats_dict['donated_sum'] = sum([d['donation_amount'] for d in donations])
 
     return render_template(
         "/users/householder/householderdashboard.html",
         statistics=stats,
-        stats = stats_dict,
+        stats=stats_dict,
         carbon_offset_data=carbon_offset_data,
         donations=donations
     )
+
 
 @bp.route("/householder/update_footprint", methods=['POST'])
 @login_required("h")
@@ -78,7 +80,7 @@ def update_carbon_footprint():
     except (ValueError, OverflowError):
         flash("Could not update your carbon footprint - the value you gave was ill-formatted", "danger")
         return redirect(url_for('householder.dashboard'))
-    
+
     if updated_footprint < 0:
         flash("Could not update your carbon footprint - you must give a positive value", "danger")
         return redirect(url_for('householder.dashboard'))
@@ -96,6 +98,16 @@ def update_carbon_footprint():
 
 @bp.route("/countries")
 def country_list():
+    countries_list = countries()
+    solar_hours, carbon_emissions, solar_panel_price, electricity_mix = countries_stats(countries_list)
+
+    return render_template(
+        "./users/householder/country_list.html",
+        countries=countries_list, solar_hours_chart=solar_hours, carbon_emissions_chart=carbon_emissions,
+        solar_panel_price_chart=solar_panel_price, electricity_mix_chart=electricity_mix)
+
+
+def countries():
     db = get_db()
     countries = db.execute(
         "SELECT country.*, COUNT(donation_amount) AS donation_count, SUM(donation_amount) AS donation_sum \
@@ -119,25 +131,30 @@ def country_list():
         cd['solar_panel_percent_footprint'] = None
 
         if cd['population_size'] >= 1000000000:
-            cd['population_size'] = {'val': cd['population_size'], 'val_format': round(cd['population_size'] / 1000000000., 2), 'unit': "billion"}
+            cd['population_size'] = {'val': cd['population_size'],
+                                     'val_format': round(cd['population_size'] / 1000000000., 2), 'unit': "billion"}
         elif cd['population_size'] >= 1000000:
-            cd['population_size'] = {'val': cd['population_size'], 'val_format': round(cd['population_size'] / 1000000., 2), 'unit': "million"}
+            cd['population_size'] = {'val': cd['population_size'],
+                                     'val_format': round(cd['population_size'] / 1000000., 2), 'unit': "million"}
         elif cd['population_size'] >= 10000:
-            cd['population_size'] = {'val': cd['population_size'], 'val_format': round(cd['population_size'] / 1000., 2), 'unit': "thousand"}
+            cd['population_size'] = {'val': cd['population_size'],
+                                     'val_format': round(cd['population_size'] / 1000., 2), 'unit': "thousand"}
         else:
             cd['population_size'] = {'val': cd['population_size'], 'val_format': cd['population_size'], 'unit': ""}
 
         if g.get("user", None):
             if g.user.get('householder_carbon_footprint', None):
                 # Calculate Percentage of how much carbon footprint is reduced by donating one solar panel
-                fraction_footprint_reduction = cd['carbon_offset_per_panel_kg'] / (g.user['householder_carbon_footprint'] * 1000)
+                fraction_footprint_reduction = cd['carbon_offset_per_panel_kg'] / (
+                            g.user['householder_carbon_footprint'] * 1000)
                 # round to 3 significant figures, convert to percent, then ensure that percentage only has 2 decimal places
-                cd['solar_panel_percent_footprint'] = round(round_to_n_sig_figs(fraction_footprint_reduction, 3) * 100, 2)
+                cd['solar_panel_percent_footprint'] = round(round_to_n_sig_figs(fraction_footprint_reduction, 3) * 100,
+                                                            2)
         country_dicts.append(cd)
 
     # Give traffic light indicator according to carbon_offset
     # Green ~ upper 30%, Red ~ lower 30%, Amber ~ Midfield
-    lst_offset_vals = [ c['carbon_offset_per_pound'] for c in country_dicts ]
+    lst_offset_vals = [c['carbon_offset_per_pound'] for c in country_dicts]
     upper_bound = calculate_percentile(lst_offset_vals, 0.7)
     lower_bound = calculate_percentile(lst_offset_vals, 0.3)
     for country in country_dicts:
@@ -148,17 +165,7 @@ def country_list():
         else:
             country['signal_color'] = "amber"
 
-    if "raw" in request.args:
-        for cd in country_dicts:
-            cd.pop("description")
-            cd.pop("electricty_consumption")
-            cd.pop("short_code")
-        return country_dicts
-    else:
-        return render_template(
-            "./users/householder/country_list.html",
-            countries=sorted(country_dicts, key=lambda c: c['carbon_offset_per_panel_kg'], reverse=True)
-        )
+    return sorted(country_dicts, key=lambda c: c['carbon_offset_per_panel_kg'], reverse=True)
 
 
 @bp.route("/countries/<country_code>")

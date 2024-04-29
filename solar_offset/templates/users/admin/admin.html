@@ -15,6 +15,28 @@
         <h2>Welcome to Solar Offset Admin DashBoard: {{ g.user.name }}</h2>
     </div>
 
+    <!-- Countries Statistics -->
+    <div class="jumbotron py-3" style="margin: 20px; border-radius: 5px; background-color: #f5f5f5;">
+        <h1>Statistics</h1>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <img src="data:image/png;base64,{{ total_donations_chart }}" alt="Total Donation Charts" class="img-fluid">
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <img src="data:image/png;base64,{{ donation_frequency_chart }}" alt="Donation Frequency Charts"
+                     class="img-fluid">
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <img src="data:image/png;base64,{{ avg_donation_chart }}" alt="Average Donation Chart"
+                     class="img-fluid">
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <img src="data:image/png;base64,{{ user_type_chart }}" alt="User Type Chart"
+                     class="img-fluid">
+            </div>
+        </div>
+    </div>
+
     <!-- Suspend Modal Box-->
     <div class="modal fade" id="suspendModalBox" tabindex="-1" role="dialog" aria-labelledby="suspendModalBoxTitle"
          aria-hidden="true">
