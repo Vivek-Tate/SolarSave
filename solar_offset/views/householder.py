@@ -96,11 +96,6 @@ def update_carbon_footprint():
     return redirect(url_for('householder.dashboard'))
 
 
-@bp.route("/about")
-def about():
-    return "Hello, About!"
-
-
 @bp.route("/countries")
 def country_list():
     countries_list = countries()
