@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+<!-- Title Section -->
+{% block title %}About Solar Save{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <h2 class="pg-title">About Solar Save</h2>
+
+        <div style="max-width: 40em; margin: auto; text-align: left; background-color: rgb(240, 240, 240); padding: 2em; border-radius: 1em;">
+            <p>
+                Our mission at SolarSave is to offer you and your household the means to offset your carbon footprint
+                by donating towards projects that aim to install solar panels worldwide.
+            </p>
+            <p>
+                Our team is working continuously on providing you with the best information and experience
+                so that can make informed decisions for donating your money in order to offset your carbon footprint.
+            </p>
+            <p>
+                If you have any questions or other queries, feel free to reach out by
+                <a href="{{ url_for('home.contact') }}">Contacting us</a>.
+            </p>
+        </div>
+    </div>
+{% endblock %}

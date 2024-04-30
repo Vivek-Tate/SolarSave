@@ -34,38 +34,30 @@
 
         <!-- Navigation Bar -->
         {% if _show_navbar %}
-            <ul class=" nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li>
-                    <a href="{{ url_for('home.home') }}" class="nav-link px-2 link-dark {% if request.path == url_for('home.home') %}active{% endif %}">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('householder.country_list') }}" class="nav-link px-2 link-dark {% if request.path == url_for('householder.country_list') %}active{% endif %}">Browse Countries</a>
-                </li>
-                <li>
-                    <a href="/contact-us" class="nav-link px-2 link-dark {% if request.path == '/contact-us' %}active{% endif %}">Contact</a>
-                </li>
-                {% if g.user %}
-                    <li>
-                        <span class="nav-link px-2 link-dark">•</span>
-                    </li>
-                    {% if 'h' in g.user.user_type %}
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                {% set navbar_links = [
+                    ( url_for('home.home'), 'Home', True ),
+                    ( url_for('householder.country_list'), 'Browse Countries', True ),
+                    ( url_for('home.contact'), 'Contact Us', True ),
+                    ( url_for('home.faqs'), 'FAQs', True ),
+                    ( url_for('home.about'), 'About', True ),
+                    ( 'Separator', None, None ),
+                    ( url_for('householder.dashboard'), 'My Profile', g.user and 'h' in g.user.user_type ),
+                    ( url_for('staff.staff'), 'Staff Reports', g.user and 's' in g.user.user_type ),
+                    ( url_for('admin.admin'), 'Admin Dashboard', g.user and 'a' in g.user.user_type ),
+                    ] %}
+                {% for lnk_ref, lnk_txt, display_condition in navbar_links %}
+                    {% if display_condition %}
+                        {% set is_active = request.path == lnk_ref %}
                         <li>
-                            <a href="{{ url_for('householder.dashboard') }}" class="nav-link px-2 link-dark {% if request.path == url_for('householder.dashboard') %}active{% endif %}">My
-                                Profile</a>
+                            <a href="{{ lnk_ref }}" class="nav-link px-2 link-dark {{ 'active' if is_active else '' }}">{{ lnk_txt }}</a>
+                        </li>
+                    {% elif lnk_ref == 'Separator' %}
+                        <li class="sep">
+                            <span class="nav-link sep px-2 link-dark">•</span>
                         </li>
                     {% endif %}
-                    {% if 's' in g.user.user_type %}
-                        <li>
-                            <a href="{{ url_for('staff.staff') }}" class="nav-link px-2 link-dark {% if request.path == url_for('staff.staff') %}active{% endif %}">Staff<br>Reports</a>
-                        </li>
-                    {% endif %}
-                    {% if 'a' in g.user.user_type %}
-                        <li>
-                            <a href="{{ url_for('admin.admin') }}"
-                               class="nav-link px-2 link-dark {% if request.path == url_for('admin.admin') %}active{% endif %}">Admin<br>Dashboard</a>
-                        </li>
-                    {% endif %}
-                {% endif %}
+                {% endfor %}
             </ul>
         {% endif %}
 

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+<!-- Title Section -->
+{% block title %}Frequently Asked Questions{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/faq-style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+    <h2 class="pg-title">FAQ</h3>
+    <p>
+        Find the answers for the most frequently asked questions below
+    </p>
+
+
+    <div class="row faq-tile-container">
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 pg-title">
+                Why Should I Donate my Money?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    By no means you have to feel obligated to donate to SolarSave.
+                    We are simply offering a means to let you do your part in combatting climate change
+                    by offestting your households carbon footprint.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 pg-title">
+                I want to Donate to a Country that's not on Your List.
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    We are always working on expanding SolarSave.
+                    If you have any ideas or suggestions, please feel free to
+                    <a href="{{ url_for('home.contact') }}">Contact us</a>.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 pg-title">
+                Are your Payments secure?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    We are doing our utmost to ensuring that any donations are transferred securely.
+                    Currently our payments are processed through PayPal which is a secure and reliable payment provider,
+                    even when you don't have an account with them.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 pg-title">
+                Where Does my Money go?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    Your donations are directly transferred to the organizations that you choose.
+                    While we provide you with the tools to donate, no part of your donation is ever directly held by us.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5 py-4 mb-4 mx-3">
+            <h6 class="mb-3 pg-title">
+                What if I want a refund?
+            </h6>
+            <div class="d-flex align-items-center justify-content-center">
+                <p style="text-align: left; width: 25em;">
+                    While we offer the means for you to make donations,
+                    we are never directly handling the money that you choose to donate.
+                    As a result, we do not have any power to refund the money that you donated.
+                    If you wish try and refund your donation, please contact the organization that you donated to,
+                    Paypal's customer support, or your bank.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
