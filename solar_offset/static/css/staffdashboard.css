@@ -1,0 +1,36 @@
+.tabulator-col{
+    min-width: 20% !important;
+}
+
+.tabulator-col:nth-last-of-type(-n+3) {
+    min-width: 22% !important;
+}
+
+.tabulator-cell{
+      min-width: 20% !important;
+}
+
+.tabulator-cell:nth-last-of-type(-n+3) {
+    min-width: 22% !important;
+}
+
+.tabulator-cell:nth-last-of-type(2){
+    left: 1000px !important;
+}
+
+.tabulator-cell:last-of-type{
+    left: 1300px !important;
+}
+.tabulator-col:nth-last-of-type(2){
+    right: 947px;
+    left: 975px !important;
+}
+
+.tabulator-col:last-of-type{
+    left: 1300px !important;
+}
+
+.tabulator-col:first-of-type,.tabulator-cell:first-of-type{
+    min-width: 15.8% !important;
+}
+

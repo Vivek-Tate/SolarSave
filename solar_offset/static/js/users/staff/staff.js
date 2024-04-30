@@ -119,7 +119,7 @@ for (let col of tabulatorColumns) {
     col.headerFilter = comparisonFilterEditor;
     col.headerFilterFunc = comparisonFilterFunction;
     col.headerFilterLiveFilter = false;
-    col.minWidth = 150;
+    col.minWidth = 220;
 }
 
 let tableElement = document.getElementById('donation-data');

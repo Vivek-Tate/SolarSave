@@ -49,23 +49,25 @@ let table = new Tabulator("#admin-table", {
             headerFilter: true,
             headerFilterPlaceholder: "Search...",
             headerFilterPlaceholderParsed: true,
-            formatter: actionFormatter
+            formatter: actionFormatter,
+            minWidth: 250
         },
-        {title: "User ID", field: "id", headerFilter: true, headerFilterPlaceholder: "Search...",},
-        {title: "Email", field: "email_username", headerFilter: true, headerFilterPlaceholder: "Search...",},
+        {title: "User ID", field: "id", headerFilter: true, headerFilterPlaceholder: "Search...", minWidth: 250},
+        {title: "Email", field: "email_username", headerFilter: true, headerFilterPlaceholder: "Search...", minWidth: 250},
         {
             title: "Action",
             field: "action",
             headerFilter: false,
             headerSort: false,
             formatter: actionFormatter,
-            width: 200
+            minWidth: 250
         },
         {
             title: "Suspend Message",
             field: "suspend_message",
             headerFilter: true,
             headerFilterPlaceholder: "Search...",
+            minWidth: 250
         }
     ]
 });
