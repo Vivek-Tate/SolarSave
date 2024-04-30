@@ -45,30 +45,11 @@
 
 {% block body %}
 
-    <div class="row">
+    <div class="row m-3">
         <div class="col-md-5">
-            <!-- Countries Statistics -->
-            <div class="jumbotron py-3" style="margin: 20px; border-radius: 5px; background-color: #f5f5f5;">
-                <h1>Statistics</h1>
-                    <div class=" mb-6">
-                        <img src="data:image/png;base64,{{ solar_hours_chart }}" alt="Solar Hours Chart"
-                             class="img-fluid">
-                    </div>
-                    <div class=" mb-6">
-                        <img src="data:image/png;base64,{{ carbon_emissions_chart }}" alt="Carbon Emissions Chart"
-                             class="img-fluid">
-                    </div>
-                    <div class=" mb-6">
-                        <img src="data:image/png;base64,{{ solar_panel_price_chart }}" alt="Solar Panel Price Chart"
-                             class="img-fluid">
-                    </div>
-                    <div class=" mb-6">
-                        <img src="data:image/png;base64,{{ electricity_mix_chart }}" alt="Electricity Mix Chart"
-                             class="img-fluid">
-                    </div>
-            </div>
             <!-- Countries Map -->
-            <div id="carouselFade" class="carousel p-3 bg-light rounded" data-ride="carousel">
+            <div id="carouselFade" class="carousel p-3 bg-light rounded mb-2" data-ride="carousel">
+                <h5>View Donation Opportunities<br>by Clicking a Country on the Map</h5>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
@@ -79,6 +60,27 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Countries Statistics -->
+            <div class="jumbotron py-3">
+                <h3>Statistics</h3>
+                    <div class="mb-2" style="padding: 0.5em; border-radius: 1em; background-color: #f5f5f5;">
+                        <img src="data:image/png;base64,{{ solar_hours_chart }}" alt="Solar Hours Chart"
+                             class="img-fluid">
+                    </div>
+                    <div class="mb-2" style="padding: 0.5em; border-radius: 1em; background-color: #f5f5f5;">
+                        <img src="data:image/png;base64,{{ carbon_emissions_chart }}" alt="Carbon Emissions Chart"
+                             class="img-fluid">
+                    </div>
+                    <div class="mb-2" style="padding: 0.5em; border-radius: 1em; background-color: #f5f5f5;">
+                        <img src="data:image/png;base64,{{ solar_panel_price_chart }}" alt="Solar Panel Price Chart"
+                             class="img-fluid">
+                    </div>
+                    <div class="mb-2" style="padding: 0.5em; border-radius: 1em; background-color: #f5f5f5;">
+                        <img src="data:image/png;base64,{{ electricity_mix_chart }}" alt="Electricity Mix Chart"
+                             class="img-fluid">
+                    </div>
             </div>
 
         </div>
