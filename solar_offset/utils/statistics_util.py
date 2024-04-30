@@ -204,15 +204,29 @@ def create_total_donations_chart(donations):
     return total_donations_chart
 
 
+import datetime
+
 def create_donation_frequency_chart(donations):
-    # Create a line chart for donation frequency over time
-    donation_dates = [datetime.strptime(d['created'], '%Y-%m-%d %H:%M') for d in donations]
+    # Get the last 12 months
+    today = datetime.datetime.now()
+    last_12_months = [today - datetime.timedelta(days=x) for x in range(0, 365, 30)][:12]
+
+    # Count the donations for each month
+    donation_counts = [0] * 12
+    for donation in donations:
+        donation_date = datetime.datetime.strptime(donation['created'], '%Y-%m-%d %H:%M')
+        for i, month_date in enumerate(last_12_months):
+            if donation_date.year == month_date.year and donation_date.month == month_date.month:
+                donation_counts[i] += 1
+                break
+
+    # Create the line chart
     fig = plt.figure(figsize=(10, 6), facecolor='#f5f5f5')
-    plt.plot(donation_dates)
+    plt.plot(last_12_months, donation_counts)
     plt.xlabel('Date')
     plt.ylabel('Donation Count')
-    plt.title('Donation Frequency over Time')
-    plt.xticks(rotation=0)
+    plt.title('Donation Frequency over the Last 12 Months')
+    plt.xticks(last_12_months, [month.strftime('%b %Y') for month in last_12_months], rotation=45)
 
     # Convert the chart to an image
     img = io.BytesIO()
