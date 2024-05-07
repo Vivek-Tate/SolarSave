@@ -6,10 +6,28 @@ Team 02 - Manhattan Project ([solar Offset](https://docs.google.com/document/d/1
 
 <ins> Feature of the System : </ins>
 
+- The application offers functionalities to 3 user types- admin, staff and householder.
+- Householder-: 
+  - Browse possible countries to donate to along with the projects per country.
+  - Donate functionality(via Paypal).
+  - Calculate Carbon offset based on a calculator
+
+- Staff-:
+  - View the user statistics(such as number of donations made by a user, project to which donation is made)
+  - Export the result as excel sheet
+
+- Admin-:
+  - View the user and staff statistics.
+  - Suspend a householder account(in case the householder has used another person's account).
+  - Delete an account.
+  - Approve a staff registration request.
 
 
-<ins> Good to have : <ins>
-
+<ins> Uncompleted Features : <ins>
+- Interactive 24/7 Chat Functionality-:
+    - This functionality was for the staff to resolve queries of the householder if they have at any point of time.
+- Payment using Stripe-:
+    - Currently, the payment option used is Paypal for sandbox donation but in the future, the stripe payment would have been an extra payment option.
 
 
 ---
@@ -18,21 +36,6 @@ Team 02 - Manhattan Project ([solar Offset](https://docs.google.com/document/d/1
 - Frontend: HTML5,CSS3, Bootstrap
 - Backend- Flask, SQL
 
-
----
-
-<ins> Some Important Dates : </ins>
-- Presentation (10%) in Week 10 - Tuesday 30th April.
-- Report (90%) in Week 11 - Thursday 9th May, 3:00pm:
-    - Teamwork (20%)
-    - Delivered Software (30%)
-    - Documentation (40%)
-    
----
-
-Cloning the project :
-* ``` git clone https://git.shefcompsci.org.uk/com6103-2023-24/team02/project.git ```
-* Enter user name and password (set your password in gitlab, if you have not)
 
 ---
 
@@ -55,4 +58,18 @@ Iteration 1 retrospective-:
 https://docs.google.com/document/d/1qGC4DiYoxajgB1_KwFGgq8Q4BMvR6q7MXV5UmXigecc/edit?usp=sharing
 
 ---
-Team02 Report Link-: https://docs.google.com/document/d/1xTUIPcTBzpBr-NFb_HYEKPPyM8XYSCPV7uyJMslg9xQ/edit?usp=sharing
+
+<ins> Some Important Dates : </ins>
+- Presentation (10%) in Week 10 - Tuesday 30th April.
+- Report (90%) in Week 11 - Thursday 9th May, 3:00pm:
+    - Teamwork (20%)
+    - Delivered Software (30%)
+    - Documentation (40%)
+    
+---
+
+Cloning the project :
+* ``` git clone https://git.shefcompsci.org.uk/com6103-2023-24/team02/project.git ```
+* Enter user name and password (set your password in gitlab, if you have not)
+
+---
