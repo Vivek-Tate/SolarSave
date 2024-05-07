@@ -15,7 +15,8 @@ Team 02 - Manhattan Project ([solar Offset](https://docs.google.com/document/d/1
 ---
 
 <ins> Technologies : </ins>
-
+- Frontend: HTML5,CSS3, Bootstrap
+- Backend- Flask, SQL
 
 
 ---
@@ -35,4 +36,23 @@ Cloning the project :
 
 ---
 
+Minutes of Meeting(MoM) Drive Link-:
+https://drive.google.com/drive/folders/1RQ4wXJVLEQ7AQNujpyIbfp9epI1jx_4u?usp=sharing
+
+---
+
+DB Schema-:
+https://docs.google.com/document/d/1UGF9HdV3c36SeMdsJGpIj0MkFOLpoIhntltdkXzna_0/edit?usp=sharing
+
+---
+
+Wireframes-:
+https://drive.google.com/drive/folders/1Lv7LW1a2jyCrWTIBGLG_VysNYpkd0OPc?usp=sharing
+
+---
+
+Iteration 1 retrospective-:
+https://docs.google.com/document/d/1qGC4DiYoxajgB1_KwFGgq8Q4BMvR6q7MXV5UmXigecc/edit?usp=sharing
+
+---
 Team02 Report Link-: https://docs.google.com/document/d/1xTUIPcTBzpBr-NFb_HYEKPPyM8XYSCPV7uyJMslg9xQ/edit?usp=sharing
