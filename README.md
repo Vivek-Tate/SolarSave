@@ -27,14 +27,14 @@ Team 02 - Manhattan Project ([solar Offset](https://docs.google.com/document/d/1
 - Interactive 24/7 Chat Functionality-:
     - This functionality was for the staff to resolve queries of the householder if they have at any point of time.
 - Payment using Stripe-:
-    - Currently, the payment option used is Paypal for sandbox donation but in the future, the stripe payment would have been an extra payment option.
+    - Currently, the payment option used is Paypal for sandbox donation but in the future, the stripe payment would be an extra payment option.
 
 
 ---
 
 <ins> Technologies : </ins>
-- Frontend: HTML5,CSS3, Bootstrap
-- Backend- Flask, SQL
+- Frontend: HTML5,CSS3, Bootstrap, Javascript,jQuery
+- Backend- Flask, SQLite
 
 
 ---
