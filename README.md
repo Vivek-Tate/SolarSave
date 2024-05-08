@@ -2,6 +2,8 @@
 
 Team 02 - Manhattan Project ([solar Offset](https://docs.google.com/document/d/1TmaMmdomg0CNfR4qqA27rtB8mQ5qMhh86YsuTJqq6y4/edit?pli=1)).
 
+Read the [User Guide](./USER_GUIDE.md) and the [Setup Guide](./SETUP_GUIDE.md) for more detailed information about how this web application works.
+
 ---
 
 <ins> Feature of the System : </ins>
