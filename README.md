@@ -1,77 +1,60 @@
-# COM6103 Team Software Project
+# Solar Save Project - COM6103 Team Software Project
 
-Team 02 - Manhattan Project ([solar Offset](https://docs.google.com/document/d/1TmaMmdomg0CNfR4qqA27rtB8mQ5qMhh86YsuTJqq6y4/edit?pli=1)).
-
-Read the [User Guide](./USER_GUIDE.md) and the [Setup Guide](./SETUP_GUIDE.md) for more detailed information about how this web application works.
-
----
-
-<ins> Feature of the System : </ins>
-
-- The application offers functionalities to 3 user types- admin, staff and householder.
-- Householder-: 
-  - Browse possible countries to donate to along with the projects per country.
-  - Donate functionality(via Paypal).
-  - Calculate Carbon offset based on a calculator
-
-- Staff-:
-  - View the user statistics(such as number of donations made by a user, project to which donation is made)
-  - Export the result as excel sheet
-
-- Admin-:
-  - View the user and staff statistics.
-  - Suspend a householder account(in case the householder has used another person's account).
-  - Delete an account.
-  - Approve a staff registration request.
-
-
-<ins> Uncompleted Features : <ins>
-- Interactive 24/7 Chat Functionality-:
-    - This functionality was for the staff to resolve queries of the householder if they have at any point of time.
-- Payment using Stripe-:
-    - Currently, the payment option used is Paypal for sandbox donation but in the future, the stripe payment would be an extra payment option.
-
+## Team 02 - Manhattan Project
+[Project Document](https://docs.google.com/document/d/1TmaMmdomg0CNfR4qqA27rtB8mQ5qMhh86YsuTJqq6y4/edit?pli=1)
 
 ---
 
-<ins> Technologies : </ins>
-- Frontend: HTML5,CSS3, Bootstrap, Javascript,jQuery
-- Backend- Flask, SQLite
+### Overview
 
+Solar Save is a web application designed to facilitate carbon offset donations. The application offers functionalities for three user types: Admin, Staff, and Householder.
+
+### Features
+
+#### Householder
+- Browse countries and associated projects for donations.
+- Donate via PayPal (sandbox donation).
+- Calculate Carbon offset using a calculator.
+
+#### Staff
+- View user statistics (number of donations, projects donated to).
+- Export statistics as an Excel sheet.
+
+#### Admin
+- View statistics for users and staff.
+- Suspend householder accounts.
+- Delete accounts.
+- Approve staff registration requests.
+
+### Uncompleted Features
+- Interactive 24/7 Chat Functionality for staff to resolve householder queries.
+- Payment using Stripe (currently, only PayPal is implemented for sandbox donations).
+
+### Technologies Used
+- **Frontend**: HTML5, CSS3, Bootstrap, JavaScript, jQuery.
+- **Backend**: Flask, SQLite.
+
+### Project Resources
+- [Minutes of Meeting (MoM)](https://drive.google.com/drive/folders/1RQ4wXJVLEQ7AQNujpyIbfp9epI1jx_4u?usp=sharing)
+- [Database Schema](https://docs.google.com/document/d/1UGF9HdV3c36SeMdsJGpIj0MkFOLpoIhntltdkXzna_0/edit?usp=sharing)
+- [Wireframes](https://drive.google.com/drive/folders/1Lv7LW1a2jyCrWTIBGLG_VysNYpkd0OPc?usp=sharing)
+- [Iteration 1 Retrospective](https://docs.google.com/document/d/1qGC4DiYoxajgB1_KwFGgq8Q4BMvR6q7MXV5UmXigecc/edit?usp=sharing)
+
+### Setup Guide
+Read the [Setup Guide](./SETUP_GUIDE.md) for detailed instructions on setting up the development environment.
+
+### User Guide
+Refer to the [User Guide](./USER_GUIDE.md) for detailed information on how to use the application.
+
+### Cloning the Project
+To clone the project repository, use the following command:
+```sh
+https://github.com/Vivek-Tate/SolarSave.git
+```
+
+### License
+See the [LICENSE](LICENSE) file for details.
 
 ---
 
-Minutes of Meeting(MoM) Drive Link-:
-https://drive.google.com/drive/folders/1RQ4wXJVLEQ7AQNujpyIbfp9epI1jx_4u?usp=sharing
-
----
-
-DB Schema-:
-https://docs.google.com/document/d/1UGF9HdV3c36SeMdsJGpIj0MkFOLpoIhntltdkXzna_0/edit?usp=sharing
-
----
-
-Wireframes-:
-https://drive.google.com/drive/folders/1Lv7LW1a2jyCrWTIBGLG_VysNYpkd0OPc?usp=sharing
-
----
-
-Iteration 1 retrospective-:
-https://docs.google.com/document/d/1qGC4DiYoxajgB1_KwFGgq8Q4BMvR6q7MXV5UmXigecc/edit?usp=sharing
-
----
-
-<ins> Some Important Dates : </ins>
-- Presentation (10%) in Week 10 - Tuesday 30th April.
-- Report (90%) in Week 11 - Thursday 9th May, 3:00pm:
-    - Teamwork (20%)
-    - Delivered Software (30%)
-    - Documentation (40%)
-    
----
-
-Cloning the project :
-* ``` git clone https://git.shefcompsci.org.uk/com6103-2023-24/team02/project.git ```
-* Enter user name and password (set your password in gitlab, if you have not)
-
----
+Feel free to reach out via the project's GitHub repository for any issues or contributions. Enjoy exploring Solar Save!
