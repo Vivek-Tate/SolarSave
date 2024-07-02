@@ -7,8 +7,8 @@ setup(
         'flask',
         'python-dotenv',
         'google-api-python-client',
-        'email-validator'
-        'matplotlib'
+        'email-validator',
+        'matplotlib',
         'numpy'
     ]
 )
