@@ -1,7 +1,6 @@
 # Solar Save Project
 
 ## Team 02 - Manhattan Project
-[Project Document](https://docs.google.com/document/d/1TmaMmdomg0CNfR4qqA27rtB8mQ5qMhh86YsuTJqq6y4/edit?pli=1)
 
 ---
 
