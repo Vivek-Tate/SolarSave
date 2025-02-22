@@ -1,7 +1,4 @@
 # Solar Save Project
-
-## Team 02 - Manhattan Project
-
 ---
 
 ### Overview
